@@ -19,9 +19,8 @@ public class LoginView extends VBox implements ManagedView {
   private final LoginController controller;
   protected ObjectProperty<EventHandler<? super ViewChangeEvent>> onViewChange;
   private TextField txtUsername, txtPassword;
-  private Text testText;
 
-  public LoginView(LoginController controller) {
+    public LoginView(LoginController controller) {
     this.controller = controller;
     this.onViewChange = new SimpleObjectProperty<>("onViewChange", null);
 
@@ -30,10 +29,18 @@ public class LoginView extends VBox implements ManagedView {
   }
 
   private void buildView() {
-    testText = new Text("df");
+
+
+      Text userNameLabel = new Text("Username");
+    Text passwordLabel = new Text("Password");
+
+
     txtUsername = new TextField();
     txtPassword = new TextField();
     Button btnLogin = new Button("Login");
+
+    // Set padding between elements
+    setSpacing(10); // Adjust the value for more or less space
 
 
 
@@ -48,7 +55,7 @@ public class LoginView extends VBox implements ManagedView {
       }
     });
 
-    getChildren().addAll(testText,txtUsername, txtPassword, btnLogin);
+    getChildren().addAll(userNameLabel,txtUsername, passwordLabel,txtPassword, btnLogin);
   }
 
   @Override

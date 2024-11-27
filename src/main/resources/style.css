@@ -1,13 +1,55 @@
-/* Global styles */
-/* added in view/ViewManager  */
-.root {
-    -fx-font-family: "Arial";
+/* Global Styles */
+
+/* Ensure the Circular font is applied if available, fallback to generic sans-serif */
+* {
+    -fx-font-family: "Circular", sans-serif;
     -fx-font-size: 14px;
-    -fx-background-color: #f0f0f0;
 }
 
+/* Body style for the root */
+.root {
+    -fx-background-color: #ffffff; /* White background for the root */
+    -fx-padding: 10px; /* Padding around the root container */
+}
+
+/* Button style */
 .button {
-    -fx-background-color: #0078D7;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-background-color: #10263B; /* Nottingham Blue for button background */
+    -fx-text-fill: white; /* Button text color */
+    -fx-font-size: 14px; /* Button text size */
+    -fx-font-weight: bold; /* Bold text for the button */
+    -fx-padding: 5px 20px; /* Padding added to button (5px top/bottom, 20px left/right) */
+    -fx-background-radius: 0; /* Sharp corners for the button */
+    -fx-transition: background-color 0.5s, -fx-text-fill 0.5s; /* Half-second transition for background and text color */
+}
+
+/* Button hover effect */
+.button:hover {
+    -fx-background-color: white; /* White background on hover */
+    -fx-text-fill: #10263B; /* Nottingham Blue text on hover */
+}
+
+/* TextField style  */
+.text-field {
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-color:  #10263B; /* Black on top and left, Nottingham Blue on bottom and right */
+    -fx-font-size: 14px; /* Text size inside text field */
+    -fx-font-weight: normal; /* Normal font weight inside text field */
+    -fx-margin: 5px; /* Padding added to text field */
+    -fx-background-color: white; /* White background for the text field */
+    -fx-background-radius: 0; /* Sharp corners for the text field */
+    -fx-placeholder-text-fill: #757575; /* Placeholder text color */
+}
+
+/* Label style (using Nottingham Blue for headers) */
+.label {
+    -fx-font-size: 16px; /* Header text size */
+    -fx-text-fill: #10263B; /* Nottingham Blue for label text */
+}
+
+/* VBox (or any layout container) */
+.vbox {
+    -fx-spacing: 10px; /* Spacing between child components */
+    -fx-alignment: center; /* Aligning content centrally */
 }
