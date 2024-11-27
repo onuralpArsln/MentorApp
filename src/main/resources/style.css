@@ -1,0 +1,13 @@
+/* Global styles */
+/* added in view/ViewManager  */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-background-color: #f0f0f0;
+}
+
+.button {
+    -fx-background-color: #0078D7;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
