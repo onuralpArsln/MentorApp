@@ -42,8 +42,9 @@ public class ViewManager {
   private final Stage stage;
   private final Map<String, Scene> scenes = new HashMap<>();
 
-  // varaible to add global css
-  private URL globalCssUrl;
+  // variable to add global css
+  private final URL globalCss;
+
 
   /**
    * Construct a new manager.
@@ -57,7 +58,7 @@ public class ViewManager {
     this.stage = stage;
 
     // load global css from resources
-    globalCssUrl = getClass().getResource("/style.css");
+    globalCss = getClass().getResource("/style.css");
   }
 
   /**
@@ -74,16 +75,16 @@ public class ViewManager {
     // Create scene
     Scene scene = new Scene(view);
     // Add global CSS if available
-    if (globalCssUrl != null) {
-      scene.getStylesheets().add(globalCssUrl.toExternalForm());
+    if (globalCss != null) {
+      scene.getStylesheets().add(globalCss.toExternalForm());
     } else {
       System.out.println("Global CSS file not found!");
     }
 
     scenes.put(key, scene);
-// global csss
+// global css
 
-//  commented to test globall
+//  commented to test global
     //scenes.put(key, new Scene(view));
   }
 
