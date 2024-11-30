@@ -51,7 +51,10 @@ public class LoginView extends VBox implements ManagedView {
         System.out.println("login succes");
         var eh = onViewChange.get();
         if (eh != null) {
-          eh.handle(new ViewChangeEvent(ViewManager.DUMMY));
+          // changed
+          //eh.handle(new ViewChangeEvent(ViewManager.DUMMY));
+          // instead of dummy connect to main page
+          eh.handle(new ViewChangeEvent(ViewManager.MAINPAGE));
         }
       }else{
         System.out.println("wrong password");

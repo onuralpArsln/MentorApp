@@ -35,7 +35,7 @@ public class MentorApp extends Application {
     return new LoginView(controller);
   }
 
-  // changed
+  // changed added main page view and controller
   private MainPageView createMainPageView(Repository<User, String> repo){
     MainPageController controller = new MainPageController(repo);
   return new MainPageView(controller);
