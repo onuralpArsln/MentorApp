@@ -27,6 +27,7 @@
 .button:hover {
     -fx-background-color: white; /* White background on hover */
     -fx-text-fill: #10263B; /* Nottingham Blue text on hover */
+    -fx-cursor: hand;
 }
 
 /* TextField style  */

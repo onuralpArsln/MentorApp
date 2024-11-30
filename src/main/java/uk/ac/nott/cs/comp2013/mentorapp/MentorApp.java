@@ -50,14 +50,14 @@ public class MentorApp extends Application {
 
     // changed
     // for setting launch size
-    stage.setWidth(800);
+    stage.setWidth(600);
     stage.setHeight(600);
 
     ViewManager vm = new ViewManager(stage);
 
     //changed
     //create a single ton to hold current user
-    CurrentUserSingleton currentUser = new CurrentUserSingleton();
+    CurrentUserSingleton currentUser = CurrentUserSingleton.getInstance();
 
 // oluşturduğun sayfaları burada eklemen lazım
 
@@ -66,7 +66,7 @@ public class MentorApp extends Application {
     // mock data is reposityory from csv
     vm.addView(ViewManager.MAINPAGE, createMainPageView(mockData,currentUser));
     vm.addView(ViewManager.LOGIN, createLoginView(mockData, currentUser));
-    // set opeening page
+    // set opening page
     vm.setStageView(ViewManager.LOGIN);
     stage.show();
   }

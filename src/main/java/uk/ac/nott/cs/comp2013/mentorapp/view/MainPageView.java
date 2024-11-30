@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
@@ -14,7 +14,7 @@ public class MainPageView extends VBox implements ManagedView {
 
 
     // changed
-    private CurrentUserSingleton currentUser;
+    private final CurrentUserSingleton currentUser;
     private final MainPageController controller;
     protected ObjectProperty<EventHandler<? super ViewChangeEvent>> onViewChange;
 
@@ -45,7 +45,8 @@ public class MainPageView extends VBox implements ManagedView {
 
         });
 
-        getChildren().addAll(userNameLabel, btnHello);
+        getChildren().addAll(userNameLabel);
+        getChildren().addAll( btnHello);
     }
 
 

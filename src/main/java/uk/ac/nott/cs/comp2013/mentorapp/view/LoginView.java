@@ -5,11 +5,16 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import uk.ac.nott.cs.comp2013.mentorapp.controller.LoginController;
-import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
 
+import javafx.scene.layout.VBox;
+import uk.ac.nott.cs.comp2013.mentorapp.controller.LoginController;
+
+
+//changed
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
+import javafx.scene.input.KeyCode;
 /**
  * The {@code LoginView} provides a login screen for users to access the app. It also serves as a
  * simple example of how to implement {@code ManagedView}. Note that this class extends {@code VBox}
@@ -34,27 +39,28 @@ public class LoginView extends VBox implements ManagedView {
   private void buildView() {
 
 
-
+    // changed
     Text passwordLabel = new Text("Password");
     Text userNameLabel = new Text("Username");
-
+    Text warningLabel = new Text("");
+    warningLabel.setFill(Color.RED);
 
 
     txtUsername = new TextField();
     txtPassword = new TextField();
     Button btnLogin = new Button("Login");
 
+    // changed
     // Set padding between elements
     setSpacing(10); // Adjust the value for more or less space
-
-
 
 
     btnLogin.setOnAction(e -> {
       boolean success = controller.onLoginClick(txtUsername.getText(), txtPassword.getText());
       if (success) {
+        // changed
         this.currentUser.name=txtUsername.getText();
-        System.out.println("login succes");
+        // page change code
         var eh = onViewChange.get();
         if (eh != null) {
           // changed
@@ -63,11 +69,34 @@ public class LoginView extends VBox implements ManagedView {
           eh.handle(new ViewChangeEvent(ViewManager.MAINPAGE));
         }
       }else{
-        System.out.println("wrong password");
+        warningLabel.setText("Incorrect Credentials");
+
       }
     });
 
-    getChildren().addAll(userNameLabel,txtUsername, passwordLabel,txtPassword, btnLogin);
+    txtPassword.setOnKeyPressed(event -> {
+      if (event.getCode() == KeyCode.ENTER) {
+        boolean success = controller.onLoginClick(txtUsername.getText(), txtPassword.getText());
+        if (success) {
+          // changed
+          this.currentUser.name=txtUsername.getText();
+          // page change code
+          var eh = onViewChange.get();
+          if (eh != null) {
+            // changed
+            //eh.handle(new ViewChangeEvent(ViewManager.DUMMY));
+            // instead of dummy connect to main page
+            eh.handle(new ViewChangeEvent(ViewManager.MAINPAGE));
+          }
+        }else{
+          warningLabel.setText("Incorrect Credentials");
+
+        }
+         // Clear the text field after pressing Enter
+      }
+    });
+
+    getChildren().addAll(userNameLabel,txtUsername, passwordLabel,txtPassword, warningLabel ,btnLogin);
   }
 
   @Override

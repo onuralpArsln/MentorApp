@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import uk.ac.nott.cs.comp2013.mentorapp.MentorApp;
 
-
+// changed
 import java.net.URL;
 
 /**
@@ -38,16 +38,16 @@ public class ViewManager {
 
   public static final String LOGIN = "login_view";
   public static final String DUMMY = "dummy_view";
-  public static final String MAINPAGE = "mainPage_view";
+
+  //changed
+  public static final String MAINPAGE = "main_page_view";
 
   private final Stage stage;
   private final Map<String, Scene> scenes = new HashMap<>();
 
-
   // changed
   // variable to add global css
   private final URL globalCss;
-
 
   /**
    * Construct a new manager.
@@ -55,11 +55,9 @@ public class ViewManager {
    * @param stage the stage used to display this manager's scenes
    */
   public ViewManager(Stage stage) {
-
     this.stage = stage;
-
+    // changed
     this.stage.setTitle("Mentor Application");
-
     // changed
     // load global css from resources
     globalCss = getClass().getResource("/style.css");
@@ -84,12 +82,10 @@ public class ViewManager {
     } else {
       System.out.println("Global CSS file not found!");
     }
-
     scenes.put(key, scene);
 // global css
-
 //  commented to test global
-    //scenes.put(key, new Scene(view));
+// scenes.put(key, new Scene(view));
   }
 
   /**
