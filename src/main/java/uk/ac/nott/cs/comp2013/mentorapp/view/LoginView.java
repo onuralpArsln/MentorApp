@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.LoginController;
+import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
 
 /**
  * The {@code LoginView} provides a login screen for users to access the app. It also serves as a
@@ -19,10 +20,12 @@ public class LoginView extends VBox implements ManagedView {
   private final LoginController controller;
   protected ObjectProperty<EventHandler<? super ViewChangeEvent>> onViewChange;
   private TextField txtUsername, txtPassword;
+  private  CurrentUserSingleton currentUser;
 
-    public LoginView(LoginController controller) {
+    public LoginView(LoginController controller, CurrentUserSingleton currentUser) {
     this.controller = controller;
     this.onViewChange = new SimpleObjectProperty<>("onViewChange", null);
+    this.currentUser=  currentUser;
 
 
     buildView();
@@ -31,8 +34,10 @@ public class LoginView extends VBox implements ManagedView {
   private void buildView() {
 
 
-      Text userNameLabel = new Text("Username");
+
     Text passwordLabel = new Text("Password");
+    Text userNameLabel = new Text("Username");
+
 
 
     txtUsername = new TextField();
@@ -48,6 +53,7 @@ public class LoginView extends VBox implements ManagedView {
     btnLogin.setOnAction(e -> {
       boolean success = controller.onLoginClick(txtUsername.getText(), txtPassword.getText());
       if (success) {
+        this.currentUser.name=txtUsername.getText();
         System.out.println("login succes");
         var eh = onViewChange.get();
         if (eh != null) {

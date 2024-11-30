@@ -8,17 +8,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
+import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
 
 public class MainPageView extends VBox implements ManagedView {
 
 
-    // fis this controller
+    // changed
+    private CurrentUserSingleton currentUser;
     private final MainPageController controller;
     protected ObjectProperty<EventHandler<? super ViewChangeEvent>> onViewChange;
 
-    public MainPageView(MainPageController controller) {
+    public MainPageView(MainPageController controller, CurrentUserSingleton currentUser) {
         this.controller = controller;
         this.onViewChange = new SimpleObjectProperty<>("onViewChange", null);
+        this.currentUser=currentUser;
         buildView();
     }
 
@@ -38,7 +41,7 @@ public class MainPageView extends VBox implements ManagedView {
 
         btnHello.setOnAction(e -> {
 
-                System.out.println("Hello");
+                System.out.println(this.currentUser.name);
 
         });
 

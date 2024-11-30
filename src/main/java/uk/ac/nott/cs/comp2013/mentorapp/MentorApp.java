@@ -5,12 +5,15 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.LoginController;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
+import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
 import uk.ac.nott.cs.comp2013.mentorapp.model.Repository;
 import uk.ac.nott.cs.comp2013.mentorapp.model.RepositoryFactory;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.User;
 import uk.ac.nott.cs.comp2013.mentorapp.view.LoginView;
 import uk.ac.nott.cs.comp2013.mentorapp.view.MainPageView;
 import uk.ac.nott.cs.comp2013.mentorapp.view.ViewManager;
+
+import javax.swing.plaf.ColorUIResource;
 
 
 /**
@@ -30,15 +33,15 @@ public class MentorApp extends Application {
   }
 
   // prepares login view adds controller
-  private LoginView createLoginView(Repository<User, String> repo) {
+  private LoginView createLoginView(Repository<User, String> repo, CurrentUserSingleton currentUser) {
     LoginController controller = new LoginController(repo);
-    return new LoginView(controller);
+    return new LoginView(controller,currentUser);
   }
 
   // changed added main page view and controller
-  private MainPageView createMainPageView(Repository<User, String> repo){
+  private MainPageView createMainPageView(Repository<User, String> repo, CurrentUserSingleton currentUser){
     MainPageController controller = new MainPageController(repo);
-  return new MainPageView(controller);
+  return new MainPageView(controller,currentUser);
   }
 
   @Override
@@ -52,14 +55,17 @@ public class MentorApp extends Application {
 
     ViewManager vm = new ViewManager(stage);
 
+    //changed
+    //create a single ton to hold current user
+    CurrentUserSingleton currentUser = new CurrentUserSingleton();
 
 // oluşturduğun sayfaları burada eklemen lazım
 
 // changed $$$$$$$$$$$$$$$$$$$$
     // add pages to your view manager
     // mock data is reposityory from csv
-    vm.addView(ViewManager.MAINPAGE, createMainPageView(mockData));
-    vm.addView(ViewManager.LOGIN, createLoginView(mockData));
+    vm.addView(ViewManager.MAINPAGE, createMainPageView(mockData,currentUser));
+    vm.addView(ViewManager.LOGIN, createLoginView(mockData, currentUser));
     // set opeening page
     vm.setStageView(ViewManager.LOGIN);
     stage.show();
