@@ -53,7 +53,7 @@ public class MentorApp extends Application {
     ViewManager vm = new ViewManager(stage);
 
 
-
+// oluşturduğun sayfaları burada eklemen lazım
 
 // changed $$$$$$$$$$$$$$$$$$$$
     // add pages to your view manager
