@@ -58,6 +58,8 @@ public class ViewManager {
 
     this.stage = stage;
 
+    this.stage.setTitle("Mentor Application");
+
     // changed
     // load global css from resources
     globalCss = getClass().getResource("/style.css");

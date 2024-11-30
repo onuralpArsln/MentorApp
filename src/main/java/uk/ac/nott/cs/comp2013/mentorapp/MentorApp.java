@@ -45,11 +45,22 @@ public class MentorApp extends Application {
   public void start(Stage stage) throws Exception {
     Repository<User, String> mockData = loadMockData();
 
+    // changed
+    // for setting launch size
+    stage.setWidth(800);
+    stage.setHeight(600);
+
     ViewManager vm = new ViewManager(stage);
 
 
 
+
+// changed $$$$$$$$$$$$$$$$$$$$
+    // add pages to your view manager
+    // mock data is reposityory from csv
+    vm.addView(ViewManager.MAINPAGE, createMainPageView(mockData));
     vm.addView(ViewManager.LOGIN, createLoginView(mockData));
+    // set opeening page
     vm.setStageView(ViewManager.LOGIN);
     stage.show();
   }
