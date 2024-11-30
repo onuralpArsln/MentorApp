@@ -38,10 +38,13 @@ public class ViewManager {
 
   public static final String LOGIN = "login_view";
   public static final String DUMMY = "dummy_view";
+  public static final String MAINPAGE = "mainPage_view";
 
   private final Stage stage;
   private final Map<String, Scene> scenes = new HashMap<>();
 
+
+  // changed
   // variable to add global css
   private final URL globalCss;
 
@@ -53,10 +56,9 @@ public class ViewManager {
    */
   public ViewManager(Stage stage) {
 
-
-
     this.stage = stage;
 
+    // changed
     // load global css from resources
     globalCss = getClass().getResource("/style.css");
   }
@@ -70,7 +72,7 @@ public class ViewManager {
   public <T extends Parent & ManagedView> void addView(String key, T view) {
     view.setOnViewChange(e -> setStageView(e.getView()));
 
-
+    // changed
     // global css added here
     // Create scene
     Scene scene = new Scene(view);

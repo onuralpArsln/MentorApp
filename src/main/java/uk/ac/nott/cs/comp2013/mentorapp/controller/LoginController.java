@@ -12,6 +12,16 @@ public class LoginController {
     this.repo = model;
   }
 
+
+  public void onTest(){
+    System.out.println("testing");
+  }
+
+  public void onTest(String testWord){
+    System.out.println(testWord);
+  }
+
+
   public boolean onLoginClick(String username, String password) {
     Optional<User> user = repo.selectById(username);
     if (user.isEmpty()) {

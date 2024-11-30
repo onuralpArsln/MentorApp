@@ -4,10 +4,12 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.LoginController;
+import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
 import uk.ac.nott.cs.comp2013.mentorapp.model.Repository;
 import uk.ac.nott.cs.comp2013.mentorapp.model.RepositoryFactory;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.User;
 import uk.ac.nott.cs.comp2013.mentorapp.view.LoginView;
+import uk.ac.nott.cs.comp2013.mentorapp.view.MainPageView;
 import uk.ac.nott.cs.comp2013.mentorapp.view.ViewManager;
 
 
@@ -21,14 +23,22 @@ public class MentorApp extends Application {
     Application.launch(args);
   }
 
+  // prepares data
   private Repository<User, String> loadMockData() throws IOException {
     RepositoryFactory factory = new RepositoryFactory();
     return factory.userHashMapRepository("/MOCK_DATA.csv");
   }
 
+  // prepares login view adds controller
   private LoginView createLoginView(Repository<User, String> repo) {
     LoginController controller = new LoginController(repo);
     return new LoginView(controller);
+  }
+
+  // changed
+  private MainPageView createMainPageView(Repository<User, String> repo){
+    MainPageController controller = new MainPageController(repo);
+  return new MainPageView(controller);
   }
 
   @Override

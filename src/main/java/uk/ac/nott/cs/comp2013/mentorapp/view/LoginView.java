@@ -48,10 +48,13 @@ public class LoginView extends VBox implements ManagedView {
     btnLogin.setOnAction(e -> {
       boolean success = controller.onLoginClick(txtUsername.getText(), txtPassword.getText());
       if (success) {
+        System.out.println("login succes");
         var eh = onViewChange.get();
         if (eh != null) {
           eh.handle(new ViewChangeEvent(ViewManager.DUMMY));
         }
+      }else{
+        System.out.println("wrong password");
       }
     });
 

@@ -51,3 +51,4 @@ public class HashMapRepository<T extends HasId<Id>, Id> implements Repository<T,
     data.remove(id);
   }
 }
+
