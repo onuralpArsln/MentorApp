@@ -40,7 +40,8 @@ public class MainPageController {
     }
 
 
+    // changed the current singleton
     public void addUserDetailsToSingleton() {
-        this.currentUser.user = repo.selectById(this.currentUser.name);
+        this.currentUser.setUser(repo.selectById(this.currentUser.name));
     }
 }

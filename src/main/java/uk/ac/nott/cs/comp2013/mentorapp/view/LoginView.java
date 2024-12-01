@@ -4,6 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javafx.scene.layout.VBox;
@@ -24,8 +25,9 @@ public class LoginView extends VBox implements ManagedView {
 
   private final LoginController controller;
   protected ObjectProperty<EventHandler<? super ViewChangeEvent>> onViewChange;
-  private TextField txtUsername, txtPassword;
+  private TextField txtUsername,txtPassword;
   private  CurrentUserSingleton currentUser;
+  private boolean isPasswordHidden=true;
 
     public LoginView(LoginController controller, CurrentUserSingleton currentUser) {
     this.controller = controller;
@@ -50,9 +52,11 @@ public class LoginView extends VBox implements ManagedView {
     txtPassword = new TextField();
     Button btnLogin = new Button("Login");
 
+
     // changed
     // Set padding between elements
     setSpacing(10); // Adjust the value for more or less space
+
 
 
     btnLogin.setOnAction(e -> {
@@ -80,6 +84,7 @@ public class LoginView extends VBox implements ManagedView {
         if (success) {
           // changed
           this.currentUser.name=txtUsername.getText();
+          this.currentUser.isActiveSession=true;
           // page change code
           var eh = onViewChange.get();
           if (eh != null) {
@@ -102,7 +107,8 @@ public class LoginView extends VBox implements ManagedView {
   // changed
   @Override
   public void onShowHook(){
-      // nothing to do onShow
+      txtPassword.clear();
+      txtUsername.clear();
   }
 
 
