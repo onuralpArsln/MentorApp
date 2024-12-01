@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
@@ -67,11 +68,8 @@ public class MainPageView extends VBox implements ManagedView {
     // changes by role
     private void updateByRole(){
         if(this.currentUser.user.getRole() == UserRole.MENTEE){
-            Text menteeLabel = new Text("mentee");
-
             System.out.println( ((Mentee) this.currentUser.user).getCvText());
-
-            getChildren().add(1,menteeLabel);
+            this.createMenteeView();
     }else if(this.currentUser.user.getRole() == UserRole.MENTOR){
             Text mentorLabel = new Text("mentor");
             getChildren().add(1,mentorLabel);
@@ -106,8 +104,18 @@ public class MainPageView extends VBox implements ManagedView {
     @Override
     public void setOnViewChange(EventHandler<? super ViewChangeEvent> eventHandler) {
         onViewChange.set(eventHandler);
-
     }
+
+
+    public void createMenteeView(){
+        ComboBox<String> comboBox = new ComboBox<>();
+
+        // Add items to the ComboBox
+        comboBox.getItems().addAll("Option A", "Option B", "Option C");
+        getChildren().add(1,comboBox);
+    }
+
+
 }
 
 // getChildren().clear();
