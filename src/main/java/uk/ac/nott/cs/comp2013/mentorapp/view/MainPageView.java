@@ -52,16 +52,9 @@ public class MainPageView extends VBox implements ManagedView {
 
     @Override
     public void onShowHook(){
-        System.out.println("on show hook main page");
-    }
-
-
-
-
-    public void onShow(){
+        this.controller.addUserDetailsToSingleton();
 
     }
-
 
     @Override
     public EventHandler<? super ViewChangeEvent> getOnViewChange() {
@@ -71,5 +64,6 @@ public class MainPageView extends VBox implements ManagedView {
     @Override
     public void setOnViewChange(EventHandler<? super ViewChangeEvent> eventHandler) {
         onViewChange.set(eventHandler);
+
     }
 }

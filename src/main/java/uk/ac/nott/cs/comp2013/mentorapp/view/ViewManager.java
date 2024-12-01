@@ -106,7 +106,7 @@ public class ViewManager {
     // mevcut viewi al
     Parent currentView = s.getRoot(); // mevcut viewe ulaşır
     // view içindeki onShowHook() methodunu çağır
-    if (currentView instanceof ManagedView) {  // Manged View interfaceine onSHowHook ekli böylece methodun varlığı kesin
+    if (currentView instanceof ManagedView) {  // Manged View interfaceine onShowHook ekli böylece methodun varlığı kesin
       ((ManagedView) currentView).onShowHook();
     }
 
