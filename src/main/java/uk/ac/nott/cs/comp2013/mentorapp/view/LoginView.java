@@ -99,6 +99,13 @@ public class LoginView extends VBox implements ManagedView {
     getChildren().addAll(userNameLabel,txtUsername, passwordLabel,txtPassword, warningLabel ,btnLogin);
   }
 
+  // changed
+  @Override
+  public void onShowHook(){
+      // nothing to do onShow
+  }
+
+
   @Override
   public EventHandler<? super ViewChangeEvent> getOnViewChange() {
     return onViewChange.get();

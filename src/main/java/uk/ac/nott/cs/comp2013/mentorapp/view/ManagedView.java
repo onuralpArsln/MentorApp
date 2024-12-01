@@ -38,4 +38,7 @@ public interface ManagedView {
    */
   void setOnViewChange(EventHandler<? super ViewChangeEvent> eventHandler);
 
+
+  //changed
+  void onShowHook();
 }

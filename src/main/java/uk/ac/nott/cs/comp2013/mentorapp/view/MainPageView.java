@@ -50,8 +50,17 @@ public class MainPageView extends VBox implements ManagedView {
     }
 
 
+    @Override
+    public void onShowHook(){
+        System.out.println("on show hook main page");
+    }
 
 
+
+
+    public void onShow(){
+
+    }
 
 
     @Override

@@ -98,9 +98,18 @@ public class ViewManager {
     if (!scenes.containsKey(key)) {
       return;
     }
-
     Scene s = scenes.get(key);
     stage.setScene(s);
+
+
+    // changed
+    // mevcut viewi al
+    Parent currentView = s.getRoot(); // mevcut viewe ulaşır
+    // view içindeki onShowHook() methodunu çağır
+    if (currentView instanceof ManagedView) {  // Manged View interfaceine onSHowHook ekli böylece methodun varlığı kesin
+      ((ManagedView) currentView).onShowHook();
+    }
+
   }
 
 }
