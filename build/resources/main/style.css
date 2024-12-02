@@ -54,3 +54,46 @@
     -fx-spacing: 10px; /* Spacing between child components */
     -fx-alignment: center; /* Aligning content centrally */
 }
+
+
+/* ComboBox Style */
+.combo-box {
+    -fx-background-color: white; /* Beyaz arka plan */
+    -fx-border-width: 3px;
+    -fx-border-color: #10263B; /* Nottingham Blue kenarlık */
+    -fx-font-size: 14px; /* Yazı boyutu */
+    -fx-font-family: "Circular", sans-serif;
+    -fx-padding: 5px; /* İçerik çevresinde boşluk */
+    -fx-background-radius: 0; /* Keskin köşeler */
+}
+
+/* ComboBox Hover Effect */
+.combo-box:hover {
+    -fx-border-color: #757575; /* Hover sırasında daha açık bir renk */
+    -fx-cursor: hand;
+}
+
+/* ComboBox Drop Down List Style */
+.combo-box .list-cell {
+    -fx-background-color: white; /* Açılır liste arka plan rengi */
+    -fx-border-color: transparent transparent #10263B transparent; /* Alt kenarlık mavi */
+    -fx-text-fill: #10263B; /* Metin rengi mavi */
+    -fx-font-weight: normal;
+}
+
+/* ComboBox Drop Down Hover Effect */
+.combo-box .list-cell:hover {
+    -fx-background-color: #10263B; /* Hover sırasında mavi arka plan */
+    -fx-text-fill: white; /* Metin rengi beyaz */
+}
+
+/* ComboBox Arrow Button Style */
+.combo-box .arrow {
+    -fx-background-color: #10263B; /* Mavi ok tuşu */
+    -fx-padding: 5px;
+    -fx-shape: "M0 0 L5 5 L0 10 Z"; /* Basit üçgen ok şekli */
+}
+
+.combo-box .arrow:hover {
+    -fx-background-color: #757575; /* Hover sırasında gri ok */
+}

@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
 import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
+import uk.ac.nott.cs.comp2013.mentorapp.model.user.SessionTopicList;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.UserRole;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.Mentee;
 
@@ -108,10 +109,16 @@ public class MainPageView extends VBox implements ManagedView {
 
 
     public void createMenteeView(){
+
+        // creating a combobox witk
         ComboBox<String> comboBox = new ComboBox<>();
 
+        comboBox.setPromptText("Please Select a Help Request Topic");
         // Add items to the ComboBox
-        comboBox.getItems().addAll("Option A", "Option B", "Option C");
+        for( String help : SessionTopicList.availTopics){
+            comboBox.getItems().addAll(help);
+        }
+
         getChildren().add(1,comboBox);
     }
 
