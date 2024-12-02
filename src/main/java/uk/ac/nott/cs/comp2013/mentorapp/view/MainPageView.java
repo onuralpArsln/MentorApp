@@ -3,9 +3,11 @@ package uk.ac.nott.cs.comp2013.mentorapp.view;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
@@ -13,6 +15,8 @@ import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.SessionTopicList;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.UserRole;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.Mentee;
+
+import java.util.List;
 
 
 public class MainPageView extends VBox implements ManagedView {
@@ -104,7 +108,8 @@ public class MainPageView extends VBox implements ManagedView {
         onViewChange.set(eventHandler);
     }
 
-    public void createMenteeView() {
+
+    private void createMenteeView() {
 
         // creating a combobox with for request
         ComboBox<String> comboBox = new ComboBox<>();
@@ -123,9 +128,18 @@ public class MainPageView extends VBox implements ManagedView {
         Text cvLabel = new Text("CV Text");
         getChildren().add(1, cvLabel);
 
+        Text userNameLabel = new Text("User");
+        Text userNamePlace = new Text(this.currentUser.name);
+
+        HBox hbox = new HBox(10);
+        hbox.getChildren().addAll(userNameLabel, userNamePlace);
+
+        getChildren().add(1, hbox);
+
     }
 
 
+    // class end
 }
 
 // getChildren().clear();
