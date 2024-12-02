@@ -27,11 +27,11 @@ public class MainPageView extends VBox implements ManagedView {
     public MainPageView(MainPageController controller, CurrentUserSingleton currentUser) {
         this.controller = controller;
         this.onViewChange = new SimpleObjectProperty<>("onViewChange", null);
-        this.currentUser=currentUser;
+        this.currentUser = currentUser;
         buildView();
     }
 
-// same for all users
+    // same for all users
     private void buildView() {
 
         Text userNameLabel = new Text("MainPage");
@@ -44,15 +44,15 @@ public class MainPageView extends VBox implements ManagedView {
 
         btnHello.setOnAction(e -> {
 
-                System.out.println(this.currentUser.name);
+            System.out.println(this.currentUser.name);
 
         });
 
         // changed
         // logout button
         btnLogOut.setOnAction(e -> {
-            this.currentUser.isActiveSession=false;
-            this.currentUser.isPersonalPageCreated=false;
+            this.currentUser.isActiveSession = false;
+            this.currentUser.isPersonalPageCreated = false;
             var eh = onViewChange.get();
             if (eh != null) {
                 eh.handle(new ViewChangeEvent(ViewManager.LOGIN));
@@ -62,40 +62,37 @@ public class MainPageView extends VBox implements ManagedView {
 
 
         getChildren().addAll(userNameLabel);
-        getChildren().addAll( btnHello);
+        getChildren().addAll(btnHello);
         getChildren().addAll(btnLogOut);
     }
 
     // changes by role
-    private void updateByRole(){
-        if(this.currentUser.user.getRole() == UserRole.MENTEE){
-            System.out.println( ((Mentee) this.currentUser.user).getCvText());
+    private void updateByRole() {
+        if (this.currentUser.user.getRole() == UserRole.MENTEE) {
+            System.out.println(((Mentee) this.currentUser.user).getCvText());
             this.createMenteeView();
-    }else if(this.currentUser.user.getRole() == UserRole.MENTOR){
+        } else if (this.currentUser.user.getRole() == UserRole.MENTOR) {
             Text mentorLabel = new Text("mentor");
-            getChildren().add(1,mentorLabel);
-        }else if(this.currentUser.user.getRole() == UserRole.ADMIN){
+            getChildren().add(1, mentorLabel);
+        } else if (this.currentUser.user.getRole() == UserRole.ADMIN) {
             Text adminLabel = new Text("admin");
-            getChildren().add(1,adminLabel);
+            getChildren().add(1, adminLabel);
         }
     }
 
 
     @Override
-    public void onShowHook(){
+    public void onShowHook() {
 
 
-        if( this.currentUser.isPersonalPageCreated == false ){
+        if (this.currentUser.isPersonalPageCreated == false) {
             this.controller.addUserDetailsToSingleton();
             getChildren().clear();
             this.buildView();
             this.updateByRole();
         }
-
-
-
-
     }
+
 
     @Override
     public EventHandler<? super ViewChangeEvent> getOnViewChange() {
@@ -107,19 +104,25 @@ public class MainPageView extends VBox implements ManagedView {
         onViewChange.set(eventHandler);
     }
 
+    public void createMenteeView() {
 
-    public void createMenteeView(){
-
-        // creating a combobox witk
+        // creating a combobox with for request
         ComboBox<String> comboBox = new ComboBox<>();
-
-        comboBox.setPromptText("Please Select a Help Request Topic");
         // Add items to the ComboBox
-        for( String help : SessionTopicList.availTopics){
+        for (String help : SessionTopicList.availTopics) {
             comboBox.getItems().addAll(help);
         }
 
-        getChildren().add(1,comboBox);
+        getChildren().add(1, comboBox);
+
+
+        // adding cv details
+        Text cvBody = new Text(((Mentee) this.currentUser.user).getCvText());
+        getChildren().add(1, cvBody);
+
+        Text cvLabel = new Text("CV Text");
+        getChildren().add(1, cvLabel);
+
     }
 
 
