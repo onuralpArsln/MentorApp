@@ -1,12 +1,12 @@
 # Mentor Application
 
-The Mentor Application is a JavaFX-based application designed to facilitate the interaction between mentors and mentees. This application allows users to manage their profiles, including username, password, and additional role-specific details, and enables mentors to set their availability for mentoring sessions. The system provides a structured approach to view management, allowing easy navigation between different screens.
+The Mentor Application is a JavaFX-based application designed to facilitate the interaction between mentors and mentees and allows adminstors to control interractions. This application allows users to manage their profiles, including username, password, and additional role-specific details, and enables mentors to set their availability for mentoring sessions. The system provides a structured approach to view management, allowing easy navigation between different screens.
 
 ## Features
 
 - **Profile Management**: Both mentors and mentees can manage their personal profile, including username, password, and specific details relevant to their roles.
 - **Dynamic View Management**: The application uses a `ViewManager` class to handle switching between different views seamlessly.
-- **Role-based Views**: The application displays different information based on the user's role, whether they are a mentee or a mentor.
+- **Role-based Views**: The application displays different information based on the user's role, whether they are a admin, mentee or a mentor.
 - **Global Styling**: The application uses a global CSS file to maintain a consistent look and feel across all views.
 
 ## Technologies
