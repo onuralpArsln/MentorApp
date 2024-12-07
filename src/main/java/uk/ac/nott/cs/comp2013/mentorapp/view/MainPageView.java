@@ -95,6 +95,9 @@ public class MainPageView extends VBox implements ManagedView {
     }
 
     private void createMenteeView() {
+
+        SupportSession[] allSessions = this.controller.getSessionList();
+
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.setPromptText("Select Support Topic");
 
@@ -123,10 +126,56 @@ public class MainPageView extends VBox implements ManagedView {
                 comboBox.setPromptText("Request Created");
                 comboBox.getSelectionModel().clearSelection();
                 comboBox.setPromptText("Request Created");
+                this.onShowHook();
 
 
             }
         });
+
+
+        for (SupportSession session : allSessions) {
+            if (session == null) {
+                continue;
+            }
+            if (session.menteeUser == null) {
+                continue;
+            }
+            if (session.mentorUser == null) {
+                continue;
+            }
+            if (session.menteeUser.getId().equals(this.currentUser.name)) {
+                HBox sessionBox = createSessionBoxMenteeView(session);
+                getChildren().add(1, sessionBox);
+            }
+        }
+
+
+        Text title2 = new Text("Support Session");
+        title2.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        getChildren().add(1, title2);
+
+
+        for (SupportSession session : allSessions) {
+            if (session == null) {
+                continue;
+            }
+            if (session.menteeUser == null) {
+                continue;
+            }
+            if (session.mentorUser != null) {
+                continue;
+            }
+            if (session.menteeUser.getId().equals(this.currentUser.name)) {
+                HBox sessionBox = createSessionBoxMenteeView(session);
+                getChildren().add(1, sessionBox);
+            }
+        }
+
+
+        Text title = new Text("Pending Support Requests");
+        title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        getChildren().add(1, title);
+
     }
 
     private void createMentorView() {
@@ -155,6 +204,27 @@ public class MainPageView extends VBox implements ManagedView {
     private HBox createSessionBox(SupportSession session) {
         Text topicLabel = new Text("Topic: " + session.topic);
         Text menteeLabel = new Text("Mentee: " + session.menteeUser.getId());
+        Text timeLabel = new Text("Time: " + session.mentorTime);
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
+
+        HBox sessionBox = new HBox(10);
+        sessionBox.setAlignment(Pos.CENTER_LEFT);
+        sessionBox.getChildren().addAll(topicLabel, menteeLabel, timeLabel, spacer);
+
+        return sessionBox;
+    }
+
+    private HBox createSessionBoxMenteeView(SupportSession session) {
+        Text topicLabel = new Text("Topic: " + session.topic);
+        String labelText = "";
+        if (session.mentorUser == null) {
+            labelText = "No mentor assigned";
+        } else {
+            labelText = "Mentor: " + session.mentorUser.getId();
+        }
+        Text menteeLabel = new Text(labelText);
         Text timeLabel = new Text("Time: " + session.mentorTime);
 
         Region spacer = new Region();
