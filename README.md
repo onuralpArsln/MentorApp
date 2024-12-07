@@ -69,7 +69,7 @@ public class CurrentUserSingleton {
         return instance;
     }
 }
-
+```
 ### Singleton Pattern: `CurrentSessionsSingleton`
 
 The `CurrentSessionsSingleton` class implements the Singleton design pattern, ensuring that there is only a single instance of the current session in the application. This class is responsible for managing the active sessions for the users, tracking which user is logged in, and maintaining session-specific data.
