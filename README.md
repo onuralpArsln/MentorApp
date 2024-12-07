@@ -1,63 +1,80 @@
-# Mentor App Coursework
+# Mentor Application
 
-This repository is for Part 2 of the COMP2013 coursework, the
-mentor scheme app. It has already been set up with some skeleton
-code including an implementation of the model.
+The Mentor Application is a JavaFX-based application designed to facilitate the interaction between mentors and mentees. This application allows users to manage their profiles, including username, password, and additional role-specific details, and enables mentors to set their availability for mentoring sessions. The system provides a structured approach to view management, allowing easy navigation between different screens.
 
-All code for the app should be created under the
-`uk.ac.nott.cs.comp2013.mentorapp` package. Use appropriate
-sub-packages to organise the code well. Application code goes
-under `src/main/java` and tests go under `src/test/java`.
+## Features
 
-## Starting the coursework
+- **Profile Management**: Both mentors and mentees can manage their personal profile, including username, password, and specific details relevant to their roles.
+- **Dynamic View Management**: The application uses a `ViewManager` class to handle switching between different views seamlessly.
+- **Role-based Views**: The application displays different information based on the user's role, whether they are a mentee or a mentor.
+- **Global Styling**: The application uses a global CSS file to maintain a consistent look and feel across all views.
 
-1. Fork this repository into your own user space, like you did
-   in PGA.
-2. In the IntelliJ launch window, instead of starting a new project
-   select "Get from VCS."
-3. Enter the URL of your personal repository and a Gitlab personal
-   access token in place of your password.
-4. When the project opens, verify that you can successfully build
-   the project.
-5. Start work!
+## Technologies
 
-## Framework
+- **JavaFX**: A framework for building graphical user interfaces in Java.
+- **Event-Driven Architecture**: The application uses event handling to trigger view changes when necessary.
+- **Singleton Pattern**: The application uses the Singleton pattern to manage the current user throughout the application lifecycle.
 
-The provided code is there to help you get started. If you believe
-it is necessary you may modify or add to this structure, but you
-will need to justify this in the report.
+## Key Components
 
-If you identify an actual bug somewhere in the provided code, you
-can raise an issue on the original repository and Ian will
-respond to it.
+### `ViewManager`
 
-### Using the view manager
+The `ViewManager` class is responsible for managing different views in the application. It allows scenes to be added and displayed on the main stage of the application. The class also listens for view change events and updates the stage accordingly.
 
-The `ViewManager` class is used to switch between scenes. Views that
-can be switched should implement the `ManagedView` interface as well as
-extending a chosen JavaFX layout (e.g. `VBox`). Using the view manager
-requires you to add the views you want to manage, and trigger view
-change events from within your views. Here are specific instructions:
+### `ManagedView Interface`
 
-1. **Registering views.** The `ViewManager#addView` method takes two arguments,
-   a string label for the view and the view itself. It is best practice to define
-   your labels as constants so that you only have to change them in one place (see
-   the `ViewManager` class implementation for an example with the `DUMMY` constant).
-2. **Changing views.** Views are changed by using `ViewChangeEvents`. The
-   `ManagedView` interface requires each class to provide a getter and setter for an
-   `EventHandler` that handles a `ViewChangeEvent`. The default `LoginView` has an
-   `onViewChange` property that you can use as an example. You can copy this property and
-   the two interface methods from `LoginView` into your own classes.
+The `ManagedView` interface is implemented by views that can be managed by the `ViewManager`. It ensures that views can trigger view change events and implement an `onShowHook()` method, which is called when the view is shown.
 
-   To actually trigger a view change, you must do the following:
+### `ProfilePageView`
 
-    1. Create a new `ViewChangeEvent`. The constructor takes one argument, which is the
-       string label of the view you want to switch to.
-    2. Get the view change handler from the property you created and check if it is null.
-       If it is not null, you can then pass your `ViewChangeEvent` object as an argument to
-       the event handler's `handle` method.
+The `ProfilePageView` is a central component where users can manage their profiles. Depending on the user's role (mentor or mentee), the page displays different sections for updating the username, password, and additional details such as the mentee's CV or the mentor's availability.
 
-The `ViewManager` takes care of the actual mechanics of switching scenes. This architecture
-is designed to reduce the coupling between individual views and the view manager---someone
-programming an individual view doesn't actually need to know how views are switched, they
-just need to trigger the appropriate event.
+### `ViewChangeEvent`
+
+The `ViewChangeEvent` class is used to represent a request to change the current view. It is triggered whenever a view needs to be updated.
+
+## Core Concepts
+
+### `updateByRole` Method
+
+The `updateByRole` method in the `ProfilePageView` class is responsible for dynamically adjusting the content of the profile page based on the user's role. When a user logs in, the method checks if the current user is a **mentor**, **mentee**, or **admin**, and updates the profile page accordingly.
+
+- **Mentees**: The mentee's profile includes details like CV text and username. Mentees can update their profile information such as their CV and password.
+  
+- **Mentors**: The mentor's profile displays fields such as username, password, and their availability for mentoring sessions. Mentors can modify their profile details and set their availability times.
+  
+- **Admins**: The admin profile includes additional management features for overseeing the application. Admins can view the user roles and manage user accounts, overseeing mentee and mentor profiles, as well as controlling access and permissions within the system.
+
+This method ensures that only the relevant fields are displayed for each role, offering a personalized experience based on the user’s profile. The inclusion of the admin role provides extra functionality for managing the overall user base, supporting administrative actions within the platform.
+
+### Singleton Pattern: `CurrentUserSingleton`
+
+The application uses the Singleton pattern to manage the **current user** throughout the application's lifecycle. The `CurrentUserSingleton` class ensures that the application always has a single instance of the current user, and it provides easy access to the user’s information (e.g., username, role, password, etc.) across different parts of the application.
+
+This approach avoids having to pass the user information explicitly across multiple views and controllers, simplifying the management of the user's state.
+
+The `CurrentUserSingleton` class ensures that there is only one instance of the current user at any given time:
+
+```java
+public class CurrentUserSingleton {
+    private static CurrentUserSingleton instance;
+    public User user;
+
+    private CurrentUserSingleton() {}
+
+    public static CurrentUserSingleton getInstance() {
+        if (instance == null) {
+            instance = new CurrentUserSingleton();
+        }
+        return instance;
+    }
+}
+
+### Singleton Pattern: `CurrentSessionsSingleton`
+
+The `CurrentSessionsSingleton` class implements the Singleton design pattern, ensuring that there is only a single instance of the current session in the application. This class is responsible for managing the active sessions for the users, tracking which user is logged in, and maintaining session-specific data.
+
+By using the Singleton pattern, the `CurrentSessionsSingleton` ensures that the session data is accessible globally throughout the application, eliminating the need to repeatedly pass session information between components. This allows for centralized management of session data, improving code readability and maintainability.
+
+The `CurrentSessionsSingleton` can be used to track multiple user sessions or the current session of the application, depending on the use case. It ensures consistency and helps manage data such as the user's login state or session-related activities across different views.
+
