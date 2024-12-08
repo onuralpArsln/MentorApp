@@ -7,24 +7,24 @@ import uk.ac.nott.cs.comp2013.mentorapp.model.HasId;
  */
 public interface User extends HasId<String> {
 
-  default String getId() {
-    return getUsername();
-  }
+    default String getId() {
+        return getUsername();
+    }
 
-  default void setId(String id) {
-    setUsername(id);
-  }
+    default void setId(String id) {
+        setUsername(id);
+    }
 
-  UserRole getRole();
+    UserRole getRole();
 
-  void setRole(UserRole role);
+    void setRole(UserRole role);
 
-  String getUsername();
+    String getUsername();
 
-  void setUsername(String username);
+    void setUsername(String username);
 
-  String getPassword();
+    String getPassword();
 
-  void setPassword(String password);
+    void setPassword(String password);
 
 }

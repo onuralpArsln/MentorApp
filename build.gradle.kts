@@ -23,6 +23,7 @@ dependencies {
     testImplementation("com.pholser:junit-quickcheck-generators:1.0")
     testImplementation("org.mockito:mockito-core:5.14.+")
     mockitoAgent("org.mockito:mockito-core:5.14.+") { isTransitive = false }
+    
 }
 
 tasks.test {

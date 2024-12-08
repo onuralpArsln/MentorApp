@@ -3,16 +3,15 @@ package uk.ac.nott.cs.comp2013.mentorapp.view;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
 import uk.ac.nott.cs.comp2013.mentorapp.controller.MainPageController;
 import uk.ac.nott.cs.comp2013.mentorapp.model.CurrentUserSingleton;
 import uk.ac.nott.cs.comp2013.mentorapp.model.session.SessionTopicList;
@@ -21,7 +20,6 @@ import uk.ac.nott.cs.comp2013.mentorapp.model.user.Administrator;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.Mentor;
 import uk.ac.nott.cs.comp2013.mentorapp.model.user.UserRole;
 
-import java.util.Arrays;
 
 public class MainPageView extends VBox implements ManagedView {
 
@@ -338,6 +336,7 @@ public class MainPageView extends VBox implements ManagedView {
                     if (mentor.getUsername().equals(selectedMentor)) {
                         session.mentorUser = mentor;
                         session.mentorTime = selectedTime;
+                        session.overseer = ((Administrator) this.currentUser.user);
                         updateSessionUI(session); // Update session UI with the new mentor and time
                         break;
                     }
@@ -376,16 +375,9 @@ public class MainPageView extends VBox implements ManagedView {
         return this.controller.getMentorsArray();  // Fetch the mentors array from the controller
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     private void updateSessionUI(SupportSession session) {
-        session.overseer = ((Administrator) this.currentUser.user);
+
         getChildren().clear();
         this.buildView();
         this.updateByRole();

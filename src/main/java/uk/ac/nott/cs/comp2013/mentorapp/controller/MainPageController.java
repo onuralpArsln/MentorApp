@@ -35,18 +35,6 @@ public class MainPageController {
         this.supportSessionSingleton.addNewSessionToList(supportSession);
 
     }
-    
-
-    public boolean onLoginClick(String username, String password) {
-        Optional<User> user = repo.selectById(username);
-        if (user.isEmpty()) {
-            return false;
-        }
-
-        User u = user.get();
-        return u.getUsername().equals(username) && u.getPassword().equals(password);
-    }
-
 
     // changed the current singleton
     public void addUserDetailsToSingleton() {

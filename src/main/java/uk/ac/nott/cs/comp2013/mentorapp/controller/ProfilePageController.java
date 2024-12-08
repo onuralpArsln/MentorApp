@@ -23,8 +23,6 @@ public class ProfilePageController {
     public void updateMenteeData(String userName, String userPass, String cv) {
         Mentee user = new Mentee(userName, userPass, cv);
         repo.update(user);
-
-
     }
 
 
@@ -35,6 +33,5 @@ public class ProfilePageController {
         Mentor user = new Mentor(userName, userPass, startDateTime, endDateTime);
         repo.update(user);
     }
-
-
+    
 }
